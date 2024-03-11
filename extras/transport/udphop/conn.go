@@ -52,6 +52,9 @@ func NewUDPHopPacketConn(addr *UDPHopAddr, hopInterval time.Duration, listenUDPF
 	} else if hopInterval < 5*time.Second {
 		return nil, errors.New("hop interval must be at least 5 seconds")
 	}
+
+	hopInterval = hopInterval + (time.Duration(rand.Intn(30)) * time.Second)
+	
 	if listenUDPFunc == nil {
 		listenUDPFunc = func() (net.PacketConn, error) {
 			return net.ListenUDP("udp", nil)

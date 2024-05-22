@@ -6,8 +6,8 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/apernet/hysteria/core/errors"
-	"github.com/apernet/hysteria/core/internal/pmtud"
+	"github.com/apernet/hysteria/core/v2/errors"
+	"github.com/apernet/hysteria/core/v2/internal/pmtud"
 )
 
 const (
@@ -195,5 +195,6 @@ type EventLogger interface {
 // bandwidth limits or post-connection authentication, for example.
 // The implementation of this interface must be thread-safe.
 type TrafficLogger interface {
-	Log(id string, tx, rx uint64) (ok bool)
+	LogTraffic(id string, tx, rx uint64) (ok bool)
+	LogOnlineState(id string, online bool)
 }
